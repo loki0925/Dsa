@@ -5,40 +5,31 @@ function runProgram(input){
     var line = 1;
     
     for(var i=0;i<tc;i++){
-        var N =input[line]
+        var N =input[line].trim().split(" ");
         line++;
-         var arr =input[line].trim().split(" ").map(Number);
+         var arr =input[line].trim().split(" ");
          line++;
-      
-         var arr2 =input[line].trim().split(" ").map(Number);
-         line++;
-        num(N,arr,arr2);
-        
+        num(N,arr);
         
     }
     
   }
-  function num(N,arr,arr2){
-  
-  
-  var l =0;
-  var r = arr.length-1;
-  var count=0;
-  while(l<arr.length && r>=0){
-              if (arr[l] < arr2[r])
-              l++;
-              else if (arr[l] > arr2[r])
-              r--;
-              else{
-                  count++;
-                  l++;
-                  r--;
-              }
-  }
-        
-    console.log(count);
-      
-      
+  function num(N,nums){
+    const result = [];
+    let prefix = 1
+ 
+    for (let i=0; i<nums.length; i++) {
+        result[i] = prefix
+        prefix *= nums[i]
+    }
+    let suffix = 1
+
+    for (let i=nums.length - 1; i>=0; i--) {
+        result[i] *= suffix
+        suffix *= nums[i]
+    }
+
+    console.log(result.join(" "));
   }
   
    
